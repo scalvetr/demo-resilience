@@ -27,5 +27,8 @@ node server.js
 cd ..
 
 
-curl http://localhost:8080/api/v1/serviceA
+curl http://localhost:8080/v1/serviceA
+curl http://demo-circuitbreaker.local-k8s/api/actuator/health
+curl http://demo-circuitbreaker.local-k8s/api/v1/serviceA
+
 ```

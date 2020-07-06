@@ -4,8 +4,11 @@ spring:
   jackson:
     serialization:
       indent_output: true
-
-
+  cloud:
+    discovery:
+      client:
+        health-indicator:
+          enabled: false
 server:
   port: 8080
 
@@ -21,6 +24,7 @@ management:
     probes:
       enabled: true
 
+
 info:
   name: ${spring.application.name}
   description: resilience4j demo
@@ -32,3 +36,6 @@ services:
     base-url: http://localhost:8081/
   serviceB:
     base-url: http://localhost:8082/
+
+logging:
+  root: debug

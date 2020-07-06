@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: service-a
+  labels:
+    name: service-a
 spec:
   containers:
     - name: service-a
@@ -17,13 +19,17 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      targetPort: 80
+      nodePort: 30080
   selector:
-    statefulset.kubernetes.io/pod-name: service-a
+    name: service-a
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   name: service-b
+  labels:
+    name: service-b
 spec:
   containers:
     - name: service-b
@@ -39,5 +45,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      targetPort: 80
+      nodePort: 30081
   selector:
-    statefulset.kubernetes.io/pod-name: service-b
+    name: service-b

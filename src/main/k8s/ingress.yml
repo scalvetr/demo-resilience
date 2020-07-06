@@ -10,10 +10,10 @@ spec:
     - host: demo-circuitbreaker.local-k8s
       http:
         paths:
-          - path: /bootapp(/|$)(.*)
+          - path: /api(/|$)(.*)
             backend:
               serviceName: demo-circuitbreaker
-              servicePort: 80
+              servicePort: 8080
           - path: /service-a(/|$)(.*)
             backend:
               serviceName: service-a
