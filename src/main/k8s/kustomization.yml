@@ -5,8 +5,15 @@ commonLabels:
 resources:
   - bootapp-deployment.yml
   - services-deployment.yml
+  - prometheus-deployment.yml
   - ingress.yml
 configMapGenerator:
   - name: demo-circuitbreaker-config
     files:
       - config/application.yml
+  - name: prometheus-config
+    files:
+      - prometheus/prometheus.yml
+  - name: graphana-config
+    files:
+      - prometheus/dashboard.json
