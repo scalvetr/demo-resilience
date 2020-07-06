@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: service-a
+spec:
+  containers:
+    - name: service-a
+      image: service-a
+      imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+  selector:
+    statefulset.kubernetes.io/pod-name: service-a
+---
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: service-b
+spec:
+  containers:
+    - name: service-b
+      image: service-b
+      imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+  selector:
+    statefulset.kubernetes.io/pod-name: service-b

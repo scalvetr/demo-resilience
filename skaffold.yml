@@ -1,0 +1,31 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+build:
+  artifacts:
+    - image: service-a
+      context: service-a
+      docker:
+    - image: service-b
+      context: service-b
+      docker:
+    - image: demo-circuitbreaker
+      custom:
+        buildCommand: ./gradlew bootBuildImage --imageName=$IMAGE
+        dependencies:
+          paths:
+            - build.gradle.kts
+            - src/main/resources
+            - src/main/k8s
+            - build/classes
+      sync:
+        manual:
+          - src: "src/main/resources/**/*"
+            dest: /workspace/BOOT-INF/classes
+            strip: src/main/resources/
+          - src: "target/classes/**/*"
+            dest: /workspace/BOOT-INF/classes
+            strip: target/classes/
+deploy:
+  kustomize:
+    paths:
+      - "src/main/k8s/"

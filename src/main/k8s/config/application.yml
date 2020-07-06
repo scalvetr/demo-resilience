@@ -1,0 +1,6 @@
+
+services:
+  serviceA:
+    base-url: http://service-a/
+  serviceB:
+    base-url: http://service-b/
