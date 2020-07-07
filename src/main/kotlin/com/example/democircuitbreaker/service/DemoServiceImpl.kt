@@ -25,7 +25,7 @@ class DemoServiceImpl constructor(
     override fun postServiceA(message: String): String {
         log.info("postServiceA $message")
         return circuitBreakerFactory.create("serviceA").run({
-            rest.postForObject("${serviceABaseURL}/message", "{message: \"sample message\"}", String::class.java)!!
+            rest.postForObject("${serviceABaseURL}/message", message, String::class.java)!!
         }, ::fallback )
     }
 
@@ -39,7 +39,7 @@ class DemoServiceImpl constructor(
     override fun postServiceB(message: String): String {
         log.info("postServiceB $message")
         return circuitBreakerFactory.create("serviceA").run({
-            rest.postForObject("${serviceBBaseURL}/message", "{message: \"sample message\"}", String::class.java)!!
+            rest.postForObject("${serviceBBaseURL}/message", message, String::class.java)!!
         }, ::fallback )
     }
 
