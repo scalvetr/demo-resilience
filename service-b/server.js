@@ -20,7 +20,7 @@ app.get('/message', (req, res) => {
 
 app.use(express.json())
 app.post('/message', (req, res) => {
-    console.log(`POST message received`)
+    console.log(`POST message received ${JSON.stringify(req.body)}`)
     res.json(req.body)
 });
 
