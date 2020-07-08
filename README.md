@@ -17,6 +17,26 @@
 skaffold dev --trigger notify
 ```
 
+
+### Prometheus
+Check the Prometheus server.
+- Open http://demo-circuitbreaker.local-k8s/prometheus/
+- Access status -> Targets, both endpoints must be "UP"
+
+### Grafana
+Configure the Grafana.
+- Open http://demo-circuitbreaker.local-k8s/grafana/
+- **Configure integration with Prometheus**
+    - Access configuration
+    - Add data source
+    - Select Prometheus
+    - Use url "http://prometheus:9090" and access with value "Server"
+- **Configure dashboard**
+    - Access "home"
+    - Import dashboard
+    - Upload dashboard.json from /docker
+
+
 ### test services
 ```shell script
 kubectl get nodes -o wide
@@ -50,4 +70,17 @@ curl -X POST http://demo-circuitbreaker.local-k8s/api/v1/serviceA -H "Content-ty
 curl http://demo-circuitbreaker.local-k8s/api/v1/serviceB
 curl -X POST http://demo-circuitbreaker.local-k8s/api/v1/serviceB -H "Content-type: application/json" -d '{"sample-attr": "test"}'
 
+```
+
+### monitoring
+* Actuator: http://demo-circuitbreaker.local-k8s/api/actuator/health
+* Prometheus: http://demo-circuitbreaker.local-k8s/prometheus/
+* Grafana: http://demo-circuitbreaker.local-k8s/grafana/
+
+
+```shell script
+#disable service a
+kubectl patch service service-a -p '{"spec":{"selector":{"name": "service-unknown"}}}'
+#enable service a
+kubectl patch service service-a -p '{"spec":{"selector":{"name": "service-a"}}}'
 ```
