@@ -52,9 +52,9 @@ info:
   version: 0.0.1
 
 services:
-  serviceA:
+  backendA:
     base-url: http://localhost:8081/
-  serviceB:
+  backendB:
     base-url: http://localhost:8082/
 
 logging:

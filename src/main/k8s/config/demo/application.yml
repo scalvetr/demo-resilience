@@ -1,6 +1,6 @@
 
 services:
-  serviceA:
+  backendA:
     base-url: http://service-a/
-  serviceB:
+  backendB:
     base-url: http://service-b/

@@ -1,6 +1,6 @@
-package com.example.democircuitbreaker.controller
+package com.example.demoresilience.controller
 
-import com.example.democircuitbreaker.service.DemoService
+import com.example.demoresilience.service.DemoService
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
@@ -12,7 +12,7 @@ class DemoController constructor(var demoService: DemoService) {
             path = ["/serviceA"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getServiceA(): String {
-        return demoService.getServiceA()
+        return demoService.getBackendA()
     }
 
     @PostMapping(
@@ -20,7 +20,7 @@ class DemoController constructor(var demoService: DemoService) {
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun postServiceA(@RequestBody message: String): String {
-        return demoService.postServiceA(message)
+        return demoService.postBackendA(message)
     }
 
 
@@ -28,7 +28,7 @@ class DemoController constructor(var demoService: DemoService) {
             path = ["/serviceB"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getServiceB(): String {
-        return demoService.getServiceB()
+        return demoService.getBackendB()
     }
 
     @PostMapping(
@@ -36,7 +36,7 @@ class DemoController constructor(var demoService: DemoService) {
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun postServiceB(@RequestBody message: String): String {
-        return demoService.postServiceB(message)
+        return demoService.postBackendB(message)
     }
 
 }

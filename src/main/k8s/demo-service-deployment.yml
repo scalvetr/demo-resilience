@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-circuitbreaker
+  name: demo-resilience
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-circuitbreaker
+      app: demo-resilience
   template:
     metadata:
       labels:
-        app: demo-circuitbreaker
+        app: demo-resilience
     spec:
       containers:
-        - name: demo-circuitbreaker
-          image: demo-circuitbreaker
+        - name: demo-resilience
+          image: demo-resilience
           imagePullPolicy: Never
           #imagePullPolicy: IfNotPresent
           ports:
@@ -52,11 +52,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-circuitbreaker
+  name: demo-resilience
 spec:
   type: NodePort
   ports:
     - protocol: TCP
       port: 8080
   selector:
-    app: demo-circuitbreaker
+    app: demo-resilience

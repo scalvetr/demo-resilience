@@ -1,4 +1,4 @@
-package com.example.democircuitbreaker.config
+package com.example.demoresilience.config
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig
 import io.github.resilience4j.timelimiter.TimeLimiterConfig
@@ -33,7 +33,7 @@ class ResilienceConfig {
      * serviceB configuration
      */
     @Bean
-    fun serviceBCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> {
+    fun backendBCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> {
         return Customizer { factory: Resilience4JCircuitBreakerFactory ->
             factory.configure(
                     Consumer { builder: Resilience4JConfigBuilder ->
@@ -42,7 +42,7 @@ class ResilienceConfig {
                                 //only one second timeout dor service B
                                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(1)).build()).build()
                     },
-                    "serviceB")
+                    "backendB")
         }
     }
 

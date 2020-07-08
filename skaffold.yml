@@ -5,7 +5,7 @@ build:
     - image: external-service
       context: external-service
       docker:
-    - image: demo-circuitbreaker
+    - image: demo-resilience
       custom:
         buildCommand: ./gradlew bootBuildImage --imageName=$IMAGE
         dependencies:

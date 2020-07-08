@@ -13,10 +13,14 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 extra["springCloudVersion"] = "Hoxton.SR6"
 extra["resilience4jVersion"] = "1.4.0"
+extra["mockkVersion"] = "1.10.0"
+extra["springmockkVersion"] = "2.0.2"
+extra["striktVersion"] = "0.25.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -35,6 +39,15 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
+
+    // test - mock librery
+    testImplementation("com.ninja-squad:springmockk:${property("springmockkVersion")}")
+    testImplementation("io.mockk:mockk:${property("mockkVersion")}")
+
+    // test - assert librery
+    testImplementation("io.strikt:strikt-core:${property("striktVersion")}")
+    testImplementation("io.strikt:strikt-mockk:${property("striktVersion")}")
+    testImplementation("io.strikt:strikt-spring:${property("striktVersion")}")
 }
 
 dependencyManagement {

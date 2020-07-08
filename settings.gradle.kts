@@ -1,1 +1,1 @@
-rootProject.name = "demo-circuitbreaker"
+rootProject.name = "demo-resilience"

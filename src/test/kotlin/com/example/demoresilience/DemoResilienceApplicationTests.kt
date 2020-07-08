@@ -1,10 +1,10 @@
-package com.example.democircuitbreaker
+package com.example.demoresilience
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class DemoCircuitbreakerApplicationTests {
+class DemoResilienceApplicationTests {
 
     @Test
     fun contextLoads() {

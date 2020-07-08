@@ -1,11 +1,11 @@
-package com.example.democircuitbreaker
+package com.example.demoresilience
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class DemoCircuitbreakerApplication
+class DemoResilianceApplication
 
 fun main(args: Array<String>) {
-    runApplication<DemoCircuitbreakerApplication>(*args)
+    runApplication<DemoResilianceApplication>(*args)
 }

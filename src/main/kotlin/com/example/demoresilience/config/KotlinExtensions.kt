@@ -1,4 +1,4 @@
-package com.example.democircuitbreaker.config
+package com.example.demoresilience.config
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
