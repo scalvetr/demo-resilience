@@ -32,6 +32,8 @@ dependencies {
     //implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     // option 2
     implementation("io.github.resilience4j:resilience4j-spring-boot2:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-all:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-kotlin:${property("resilience4jVersion")}")
 
     //export metrics
     runtimeOnly("io.github.resilience4j:resilience4j-micrometer:${property("resilience4jVersion")}")

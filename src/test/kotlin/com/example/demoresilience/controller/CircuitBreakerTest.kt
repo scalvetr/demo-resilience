@@ -75,6 +75,7 @@ class CircuitBreakerTest : AbstractCircuitBreakerTest() {
         val response = performCall(backendCall)
         expectThat(response) {
             get { statusCode }.isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
+            //get { statusCode }.isEqualTo(HttpStatus.OK)
         }
     }
 
