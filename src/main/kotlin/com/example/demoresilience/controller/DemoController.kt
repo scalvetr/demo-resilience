@@ -5,7 +5,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("")
 class DemoController constructor(var demoService: DemoService) {
 
     @GetMapping(

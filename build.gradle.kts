@@ -29,9 +29,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // option1
-    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
+    //implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     // option 2
-    //implementation("io.github.resilience4j:resilience4j-spring-boot2:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-spring-boot2:${property("resilience4jVersion")}")
+
+    //export metrics
     runtimeOnly("io.github.resilience4j:resilience4j-micrometer:${property("resilience4jVersion")}")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 

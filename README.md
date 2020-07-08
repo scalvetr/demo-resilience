@@ -64,11 +64,11 @@ curl http://demo-circuitbreaker.local-k8s/api/actuator/prometheus
 
 #service A
 curl http://demo-circuitbreaker.local-k8s/api/v1/serviceA
-curl -X POST http://demo-circuitbreaker.local-k8s/api/v1/serviceA -H "Content-type: application/json" -d '{"sample-attr": "test"}'
+curl -X POST http://demo-circuitbreaker.local-k8s/api/serviceA -H "Content-type: application/json" -d '{"sample-attr": "test"}'
 
 #service A
 curl http://demo-circuitbreaker.local-k8s/api/v1/serviceB
-curl -X POST http://demo-circuitbreaker.local-k8s/api/v1/serviceB -H "Content-type: application/json" -d '{"sample-attr": "test"}'
+curl -X POST http://demo-circuitbreaker.local-k8s/api/serviceB -H "Content-type: application/json" -d '{"sample-attr": "test"}'
 
 ```
 
