@@ -17,7 +17,8 @@ class DemoController constructor(var demoService: DemoService) {
 
     @PostMapping(
             path = ["/serviceA"],
-            produces = [MediaType.APPLICATION_JSON_VALUE])
+            produces = [MediaType.APPLICATION_JSON_VALUE],
+            consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun postServiceA(@RequestBody message: String): String {
         return demoService.postServiceA(message)
     }
@@ -25,8 +26,7 @@ class DemoController constructor(var demoService: DemoService) {
 
     @GetMapping(
             path = ["/serviceB"],
-            produces = [MediaType.APPLICATION_JSON_VALUE],
-            consumes = [MediaType.APPLICATION_JSON_VALUE])
+            produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getServiceB(): String {
         return demoService.getServiceB()
     }
