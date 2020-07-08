@@ -3,6 +3,9 @@ package com.example.democircuitbreaker.service
 import com.example.democircuitbreaker.config.loggerFor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
@@ -25,7 +28,10 @@ class DemoServiceImpl constructor(
     override fun postServiceA(message: String): String {
         log.info("postServiceA $message")
         return circuitBreakerFactory.create("serviceA").run({
-            rest.postForObject("${serviceABaseURL}/message", message, String::class.java)!!
+            val headers = HttpHeaders()
+            headers.contentType = MediaType.APPLICATION_JSON
+            val entity = HttpEntity(message, headers)
+            rest.postForObject("${serviceABaseURL}/message", entity, String::class.java)!!
         }, ::fallback )
     }
 
@@ -38,13 +44,16 @@ class DemoServiceImpl constructor(
 
     override fun postServiceB(message: String): String {
         log.info("postServiceB $message")
-        return circuitBreakerFactory.create("serviceA").run({
-            rest.postForObject("${serviceBBaseURL}/message", message, String::class.java)!!
+        return circuitBreakerFactory.create("serviceB").run({
+            val headers = HttpHeaders()
+            headers.contentType = MediaType.APPLICATION_JSON
+            val entity = HttpEntity(message, headers)
+            rest.postForObject("${serviceBBaseURL}/message", entity, String::class.java)!!
         }, ::fallback )
     }
 
     fun fallback(e: Throwable): String {
         log.warn("Error captured", e)
-        return "{error: \"${e.message}\"}"
+        return "{ \"error\": \"${e.message}\"}"
     }
 }

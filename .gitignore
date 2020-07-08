@@ -30,5 +30,4 @@ out/
 
 ### VS Code ###
 .vscode/
-/service-a/node_modules/
-/service-b/node_modules/
+/external-service/node_modules/

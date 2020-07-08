@@ -42,12 +42,12 @@ spec:
             - name: spring.config.location
               value: classpath:application.yml,file:/app/config/application.yml
           volumeMounts:
-            - name: demo-circuitbreaker-config
+            - name: demo-service-config
               mountPath: /app/config
       volumes:
-        - name: demo-circuitbreaker-config
+        - name: demo-service-config
           configMap:
-            name: demo-circuitbreaker-config
+            name: demo-service-config
 ---
 apiVersion: v1
 kind: Service

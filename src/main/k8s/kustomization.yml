@@ -3,17 +3,23 @@ kind: Kustomization
 commonLabels:
   project: demo-circuitbreaker
 resources:
-  - bootapp-deployment.yml
+  - demo-service-deployment.yml
   - services-deployment.yml
   - prometheus-deployment.yml
   - ingress.yml
 configMapGenerator:
-  - name: demo-circuitbreaker-config
+  - name: demo-service-config
     files:
-      - config/application.yml
+      - config/demo/application.yml
   - name: prometheus-config
     files:
-      - prometheus/prometheus.yml
-  - name: graphana-config
+      - config/prometheus/prometheus.yml
+  - name: grafana-config
     files:
-      - prometheus/dashboard.json
+      - config/grafana/dashboard.json
+  - name: service-a-config
+    files:
+      - config/service-a/config.js
+  - name: service-b-config
+    files:
+      - config/service-b/config.js

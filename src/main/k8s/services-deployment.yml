@@ -7,8 +7,15 @@ metadata:
 spec:
   containers:
     - name: service-a
-      image: service-a
+      image: external-service
       imagePullPolicy: Never
+      volumeMounts:
+          - name: service-a-config
+            mountPath: /usr/src/app/config
+  volumes:
+    - name: service-a-config
+      configMap:
+        name: service-a-config
 ---
 apiVersion: v1
 kind: Service
@@ -33,8 +40,15 @@ metadata:
 spec:
   containers:
     - name: service-b
-      image: service-b
+      image: external-service
       imagePullPolicy: Never
+      volumeMounts:
+        - name: service-b-config
+          mountPath: /usr/src/app/config
+  volumes:
+    - name: service-b-config
+      configMap:
+        name: service-b-config
 ---
 apiVersion: v1
 kind: Service

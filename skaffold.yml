@@ -2,11 +2,8 @@ apiVersion: skaffold/v2beta5
 kind: Config
 build:
   artifacts:
-    - image: service-a
-      context: service-a
-      docker:
-    - image: service-b
-      context: service-b
+    - image: external-service
+      context: external-service
       docker:
     - image: demo-circuitbreaker
       custom:
