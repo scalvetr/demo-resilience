@@ -1,7 +1,11 @@
 # Demo resilience
 
 Demo resilience is a demo project showing how to use resilience4j & spring boot.
- 
+
+Resilience patterns are applied to a Spring Boot application which connects with two services implemented with Node.js 
+
+![Components Diagram](doc/diagrams/components.png)
+
 ## Build
 * Spring Boot Project
 ```shell script
@@ -112,7 +116,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 sudo vi /etc/hosts
 cat /etc/hosts | grep localhost
 127.0.0.1       localhost demo-resilience.local-k8s
-#install skaffold
 ```
 
 * Run

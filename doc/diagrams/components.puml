@@ -1,0 +1,58 @@
+@startuml
+
+skinparam componentStyle uml2
+skinparam component {
+  FontSize 13
+  FontName Courier
+  BorderColor #D79B00
+  BackgroundColor #FFE6CC
+
+
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+skinparam component<<Spring Boot App>> {
+  BackgroundColor #BAC8D3
+  BorderColor #23445D
+}
+skinparam component<<Node.js>> {
+  BackgroundColor #FFCCCC
+  BorderColor #36393D
+}
+
+package "Resilient Services" {
+    component demoResilience as "demo-resilience" << Spring Boot App >> {
+        component backendAClient
+        component backendBClient
+    }
+    backendAClient -[hidden]-> backendBClient
+
+    backendAClient -right- backendA : REST
+    backendBClient -right- backendB : REST
+
+    note top of demoResilience
+        Resilient Service BFF
+    end note
+}
+
+
+package "Services" {
+    component backendA as "backend-a" <<Node.js>> {
+    }
+    component backendB as "backend-b" <<Node.js>> {
+    }
+    backendA -[hidden]- backendB
+
+    note right of backendA
+        Fast Backend
+    end note
+    note right of backendB
+        Slow Backend:
+        - config.getOperationDelay = 1000
+        - config.postOperationDelay = 3000
+    end note
+}
+
+
+@enduml
