@@ -9,6 +9,8 @@ plugins {
     //https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm
     kotlin("kapt") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
+
+    id("com.github.lkishalmi.gatling") version "3.3.4"
 }
 
 group = "com.example"

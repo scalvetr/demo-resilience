@@ -170,7 +170,10 @@ Configure the Grafana.
     - Import dashboard
     - Upload dashboard.json from /docker
 
-
+### load test
+```shell script
+./gradlew gatlingRun
+```
 ### monitoring
 * Actuator: http://demo-resilience.local-k8s/api/actuator/health
 * Prometheus: http://demo-resilience.local-k8s/prometheus/
