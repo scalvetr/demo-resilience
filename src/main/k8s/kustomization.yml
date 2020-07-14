@@ -19,7 +19,9 @@ configMapGenerator:
       - config/grafana/dashboard.json
   - name: service-a-config
     files:
-      - config/service-a/config.js
+      - config/service-a/app.config
+      - config/service-a/chaos-monkey.config
   - name: service-b-config
     files:
-      - config/service-b/config.js
+      - config/service-b/app.config
+      - config/service-b/chaos-monkey.config

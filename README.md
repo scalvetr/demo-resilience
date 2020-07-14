@@ -72,7 +72,7 @@ docker stop service-b
 ## Local Run (KinD + skaffold)
 ### install skaffold
 ```shell script
-curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v1.12.1/skaffold-linux-amd64
 sudo install skaffold /usr/local/bin/
 ```
 ### install kustomize
@@ -173,6 +173,12 @@ Configure the Grafana.
 ### load test
 ```shell script
 ./gradlew gatlingRun
+
+# trigger chaos
+
+# https://www.npmjs.com/package/chaos-monkey
+#Browse to http/s://{host}/chaos and trigger some chaos
+#Invoke the API POST: http/s://{host}/chaos/random
 ```
 ### monitoring
 * Actuator: http://demo-resilience.local-k8s/api/actuator/health
