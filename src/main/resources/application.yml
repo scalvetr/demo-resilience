@@ -19,7 +19,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info, metrics, prometheus
+        include: health, info, env, metrics, prometheus
   health:
     circuitbreakers.enabled: true
     probes.enabled: true

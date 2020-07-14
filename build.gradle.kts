@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     id("org.springframework.boot") version "2.3.1.RELEASE"
@@ -80,5 +81,18 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
+    }
+}
+
+tasks.withType<BootRun> {
+    logger.warn("checking arguments")
+    if (project.hasProperty("args")) {
+        logger.warn("arguments found!")
+        var arguments = project.property("args") as String
+        logger.warn("arguments {}", arguments)
+        jvmArgs = arguments.split(",")
+    } else {
+
+        logger.warn("arguments NOT found")
     }
 }
