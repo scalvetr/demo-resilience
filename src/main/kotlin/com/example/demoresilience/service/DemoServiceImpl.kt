@@ -1,49 +1,45 @@
 package com.example.demoresilience.service
 
 import com.example.demoresilience.config.loggerFor
-import com.example.demoresilience.rest.ClientBackendA
-import com.example.demoresilience.rest.ClientBackendB
+import com.example.demoresilience.rest.BackendAClient
+import com.example.demoresilience.rest.BackendBClient
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry
+import io.github.resilience4j.kotlin.circuitbreaker.decorateFunction
 import org.springframework.stereotype.Service
-import java.util.function.Supplier
 
 @Service
 class DemoServiceImpl constructor(
         var circuitBreakerRegistry: CircuitBreakerRegistry,
-        var backendA: ClientBackendA,
-        var backendB: ClientBackendB
+        var backendA: BackendAClient,
+        var backendB: BackendBClient
 ) : DemoService {
     var log = loggerFor(this::class.java)
     override fun getBackendA(): String {
         log.info("getBackendA")
-        return circuitBreakerRegistry.circuitBreaker(ClientBackendA.CIRCUIT).decorateCheckedSupplier {
+        return circuitBreakerRegistry.circuitBreaker(BackendAClient.CIRCUIT).decorateFunction {
             backendA.getMessage()
-            /*}.apply().recover { e -> Supplier { handleError(e) } }.get()*/
-        }.recover { e -> Supplier { handleError(e) } }.get()
+        }.invoke()
     }
 
     override fun postBackendA(message: String): String {
         log.info("postBackendA $message")
-        return circuitBreakerRegistry.circuitBreaker(ClientBackendA.CIRCUIT).decorateCheckedSupplier {
+        return circuitBreakerRegistry.circuitBreaker(BackendAClient.CIRCUIT).decorateFunction {
             backendA.postMessage(message)
-        }.recover { e -> Supplier { handleError(e) } }.get();
+        }.invoke()
     }
 
     override fun getBackendB(): String {
         log.info("getBackendB")
-        return circuitBreakerRegistry.circuitBreaker(ClientBackendB.CIRCUIT).decorateCheckedSupplier {
+        return circuitBreakerRegistry.circuitBreaker(BackendBClient.CIRCUIT).decorateFunction {
             backendB.getMessage()
-        }.recover { e -> Supplier { handleError(e) } }.get();
+        }.invoke()
     }
 
     override fun postBackendB(message: String): String {
         log.info("postBackendB $message")
-        return circuitBreakerRegistry.circuitBreaker(ClientBackendB.CIRCUIT).decorateCheckedSupplier {
+        return circuitBreakerRegistry.circuitBreaker(BackendBClient.CIRCUIT).decorateFunction {
             backendB.postMessage(message)
-        }.recover { e -> Supplier { handleError(e) } }.get();
+        }.invoke()
     }
 
-    fun handleError(error: Throwable): String {
-        return "{\"error\": \"${error.message}\"}"
-    }
 }

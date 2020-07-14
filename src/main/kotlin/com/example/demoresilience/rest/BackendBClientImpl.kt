@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
 @Service
-class ClientBackendAImpl constructor(
+class BackendBClientImpl constructor(
         @Qualifier("restTemplate") var rest: RestTemplate,
-        @Value("\${services.backendA.base-url}") var backendBaseURL: String
-) : ClientBackendA {
+        @Value("\${services.backendB.base-url}") var backendBaseURL: String
+) : BackendBClient {
     var log = loggerFor(this::class.java)
 
     override fun getMessage(): String {

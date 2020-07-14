@@ -23,7 +23,6 @@ class DemoController constructor(var demoService: DemoService) {
         return demoService.postBackendA(message)
     }
 
-
     @GetMapping(
             path = ["/serviceB"],
             produces = [MediaType.APPLICATION_JSON_VALUE])

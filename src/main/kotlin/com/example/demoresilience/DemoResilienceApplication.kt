@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class DemoResilianceApplication
+class DemoResilienceApplication
 
 fun main(args: Array<String>) {
-    runApplication<DemoResilianceApplication>(*args)
+    runApplication<DemoResilienceApplication>(*args)
 }

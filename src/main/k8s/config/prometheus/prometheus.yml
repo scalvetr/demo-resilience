@@ -19,7 +19,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name:       'demo-circuitbreaker'
+  - job_name:       'demo-resilience'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
@@ -27,4 +27,4 @@ scrape_configs:
     metrics_path: /actuator/prometheus
 
     static_configs:
-      - targets: ['demo-circuitbreaker:8080']
+      - targets: ['demo-resilience:8080']

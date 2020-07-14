@@ -3,7 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.3.1.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
+
     kotlin("jvm") version "1.3.72"
+    //https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm
+    kotlin("kapt") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
 }
 
@@ -17,7 +20,7 @@ repositories {
 }
 
 extra["springCloudVersion"] = "Hoxton.SR6"
-extra["resilience4jVersion"] = "1.4.0"
+extra["resilience4jVersion"] = "1.5.0"
 extra["mockkVersion"] = "1.10.0"
 extra["springmockkVersion"] = "2.0.2"
 extra["striktVersion"] = "0.25.0"
@@ -32,8 +35,17 @@ dependencies {
     //implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     // option 2
     implementation("io.github.resilience4j:resilience4j-spring-boot2:${property("resilience4jVersion")}")
-    implementation("io.github.resilience4j:resilience4j-all:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-circuitbreaker:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-bulkhead:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-retry:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-cache:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-timelimiter:${property("resilience4jVersion")}")
+    implementation("io.github.resilience4j:resilience4j-ratelimiter:${property("resilience4jVersion")}")
     implementation("io.github.resilience4j:resilience4j-kotlin:${property("resilience4jVersion")}")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+
+    // to allow anotations
+    implementation("org.springframework.boot:spring-boot-starter-aop")
 
     //export metrics
     runtimeOnly("io.github.resilience4j:resilience4j-micrometer:${property("resilience4jVersion")}")

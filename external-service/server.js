@@ -15,7 +15,7 @@ app.get('/message', (req, res) => {
     setTimeout(() => {
         console.log(`GET /message -> replaying`)
         res.send(JSON.stringify({
-            title: '\"${config.serviceName}\" message',
+            title: `"${config.serviceName}" message`,
             message: 'hello world'
         }));
     }, config.getOperationDelay);

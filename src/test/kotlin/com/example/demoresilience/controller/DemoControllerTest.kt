@@ -1,12 +1,11 @@
 package com.example.demoresilience.controller
 
 import com.example.demoresilience.AbstractCircuitBreakerTest
-import com.example.demoresilience.rest.ClientBackendA
-import com.example.demoresilience.rest.ClientBackendB
+import com.example.demoresilience.rest.BackendAClient
+import com.example.demoresilience.rest.BackendBClient
 import com.ninjasquad.springmockk.MockkBean
 import io.github.resilience4j.circuitbreaker.CircuitBreaker
 import io.mockk.every
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
@@ -16,24 +15,24 @@ import org.springframework.web.client.ResourceAccessException
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class CircuitBreakerTest : AbstractCircuitBreakerTest() {
+class DemoControllerTest : AbstractCircuitBreakerTest() {
     @MockkBean
-    lateinit var clientBackendA: ClientBackendA
+    lateinit var clientBackendA: BackendAClient
 
     @MockkBean
-    lateinit var clientBackendB: ClientBackendB
+    lateinit var clientBackendB: BackendBClient
 
-    @Test @Disabled
+    @Test
     fun shouldOpenBackendACircuitBreaker() {
 
         // When
-        listOf(1, 2).forEach { _ -> produceFailure(BackendCall.GET_BACKEND_A) }
+        listOf(1, 3).forEach { _ -> produceFailure(BackendCall.GET_BACKEND_A) }
 
         // Then
         checkHealthStatus(BackendCall.GET_BACKEND_A.circuit, CircuitBreaker.State.OPEN)
     }
 
-    @Test @Disabled
+    @Test
     fun shouldCloseBackendACircuitBreaker() {
         transitionToOpenState(BackendCall.GET_BACKEND_A.circuit)
         circuitBreakerRegistry.circuitBreaker(BackendCall.GET_BACKEND_A.circuit).transitionToHalfOpenState()
@@ -45,25 +44,26 @@ class CircuitBreakerTest : AbstractCircuitBreakerTest() {
         checkHealthStatus(BackendCall.GET_BACKEND_A.circuit, CircuitBreaker.State.CLOSED)
     }
 
-    @Test @Disabled
-    fun shouldOpenBackendBCircuitBreaker() {
+    @Test
+    fun shouldNotOpenBackendBCircuitBreaker() {
         // When
-        listOf(1, 4).forEach { _ -> produceFailure(BackendCall.GET_BACKEND_B) }
+        listOf(1, 3).forEach { _ -> produceFailure(BackendCall.GET_BACKEND_B) }
 
         // Then
-        checkHealthStatus(BackendCall.GET_BACKEND_B.circuit, CircuitBreaker.State.OPEN)
+        //as minimumNumberOfCalls = 5
+        checkHealthStatus(BackendCall.GET_BACKEND_B.circuit, CircuitBreaker.State.CLOSED)
     }
 
-    @Test @Disabled
+    @Test
     fun shouldCloseBackendBCircuitBreaker() {
         transitionToOpenState(BackendCall.GET_BACKEND_B.circuit)
         circuitBreakerRegistry.circuitBreaker(BackendCall.GET_BACKEND_B.circuit).transitionToHalfOpenState()
 
         // When
-        listOf(1, 3).forEach { _ -> produceSuccess(BackendCall.GET_BACKEND_B) }
+        listOf(1, 5).forEach { _ -> produceSuccess(BackendCall.GET_BACKEND_B) }
 
         // Then
-        checkHealthStatus(BackendCall.GET_BACKEND_B.circuit, CircuitBreaker.State.CLOSED)
+        checkHealthStatus(BackendCall.GET_BACKEND_B.circuit, CircuitBreaker.State.HALF_OPEN)
     }
 
     private fun produceFailure(backendCall: BackendCall) {
@@ -101,3 +101,4 @@ class CircuitBreakerTest : AbstractCircuitBreakerTest() {
         }
     }
 }
+
