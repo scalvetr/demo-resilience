@@ -15,10 +15,10 @@ import org.springframework.http.HttpMethod
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [DemoResilienceApplication::class])
 abstract class AbstractIntegrationTest {
     enum class BackendCall(val circuit: String, val url: String, var method: HttpMethod) {
-        GET_BACKEND_A(BackendAClient.CIRCUIT, "/serviceA", HttpMethod.GET),
-        POST_BACKEND_A(BackendAClient.CIRCUIT, "/serviceA", HttpMethod.POST),
-        GET_BACKEND_B(BackendBClient.CIRCUIT, "/serviceB", HttpMethod.GET),
-        POST_BACKEND_B(BackendBClient.CIRCUIT, "/serviceB", HttpMethod.POST)
+        GET_BACKEND_A(BackendAClient.BACKEND_NAME, "/serviceA", HttpMethod.GET),
+        POST_BACKEND_A(BackendAClient.BACKEND_NAME, "/serviceA", HttpMethod.POST),
+        GET_BACKEND_B(BackendBClient.BACKEND_NAME, "/serviceB", HttpMethod.GET),
+        POST_BACKEND_B(BackendBClient.BACKEND_NAME, "/serviceB", HttpMethod.POST)
     }
 
     @Autowired

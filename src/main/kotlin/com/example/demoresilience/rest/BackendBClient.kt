@@ -2,7 +2,7 @@ package com.example.demoresilience.rest
 
 interface BackendBClient {
     companion object {
-        const val CIRCUIT = "backendB"
+        const val BACKEND_NAME = "backendB"
     }
 
     fun getMessage(): String

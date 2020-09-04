@@ -7,7 +7,7 @@ import io.github.resilience4j.retry.annotation.Retry
 // TODO check why annotations are not working
 interface BackendAClient {
     companion object {
-        const val CIRCUIT = "backendA"
+        const val BACKEND_NAME = "backendA"
     }
 
     //@CircuitBreaker(name = CIRCUIT)
