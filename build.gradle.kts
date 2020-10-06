@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
-    id("org.springframework.boot") version "2.3.1.RELEASE"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
+    id("org.springframework.boot") version "2.3.4.RELEASE"
+    id("io.spring.dependency-management") version "1.0.10.RELEASE"
 
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.10"
     //https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm
-    kotlin("kapt") version "1.3.72"
-    kotlin("plugin.spring") version "1.3.72"
+    kotlin("kapt") version "1.4.10"
+    kotlin("plugin.spring") version "1.4.10"
 
     id("com.github.lkishalmi.gatling") version "3.3.4"
 }
